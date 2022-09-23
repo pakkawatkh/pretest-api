@@ -1,0 +1,16 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/pretest
+    username: root
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+      jdbc:
+        time_zone: ICT
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
