@@ -21,10 +21,10 @@ public class User {
     @Column(length = 100)
     private String email;
 
-    @Column(length = 100, unique = true)
+    @Column(length = 40, unique = true)
     private String userName;
 
-    @Column(length = 100)
+    @Column(length = 20)
     private String nickName;
 
     @Column(length = 120)
