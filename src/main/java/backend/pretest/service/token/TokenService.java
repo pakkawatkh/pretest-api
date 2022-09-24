@@ -57,10 +57,13 @@ public class TokenService {
     public User getUserByToken() throws BaseForbiddenException {
         String userId = this.userId();
 
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty()) throw BaseForbiddenException.Forbidden();
+        Optional<User> opt = userRepository.findById(userId);
+        if (opt.isEmpty()) throw BaseForbiddenException.Forbidden();
 
-        return user.get();
+        User user = opt.get();
+        if (!this.lastPassword().equals("[" + user.getLast_password().toGMTString() + "]")) throw BaseForbiddenException.Forbidden();
+
+        return user;
     }
 
     public String userId() {
@@ -68,5 +71,9 @@ public class TokenService {
         Authentication authentication = context.getAuthentication();
         return (String) authentication.getPrincipal();
     }
-
+    public String lastPassword() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        return authentication.getAuthorities().toString();
+    }
 }
