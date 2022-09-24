@@ -14,3 +14,8 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
+
+app:
+  token:
+    secret: pretest#SecretKey
+    issuer: BackendPretest
