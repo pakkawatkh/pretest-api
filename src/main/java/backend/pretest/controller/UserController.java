@@ -6,21 +6,18 @@ import backend.pretest.model.LoginResponse;
 import backend.pretest.model.UserUpdateRequest;
 import backend.pretest.service.UserService;
 import backend.pretest.service.token.TokenService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user")
+@AllArgsConstructor
 public class UserController {
 
     private final UserService service;
     private final TokenService tokenService;
-
-    public UserController(UserService service, TokenService tokenService) {
-        this.service = service;
-        this.tokenService = tokenService;
-    }
 
     @SneakyThrows
     @GetMapping("profile")

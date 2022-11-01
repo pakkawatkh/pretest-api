@@ -52,13 +52,15 @@ public class UserService {
         return save(user);
     }
 
-    public User findByUsername(String username) throws BaseNotFoundException {
+    @SneakyThrows
+    public User findByUsername(String username)  {
         Optional<User> opt = repository.findByUserName(username);
         if (opt.isEmpty()) throw BaseNotFoundException.NotFoundUser();
         return opt.get();
     }
 
-    public void existsUsername(String username) throws BaseBadRequestException {
+    @SneakyThrows
+    public void existsUsername(String username) {
         boolean exists = repository.existsByUserName(username);
         if (exists) throw BaseBadRequestException.UsernameDuplicate();
     }
@@ -68,7 +70,8 @@ public class UserService {
     }
 
 
-    public User changePassword(User user, String passwordOld, String passwordNew) throws BaseBadRequestException, BaseInternalServerErrorException {
+    @SneakyThrows
+    public User changePassword(User user, String passwordOld, String passwordNew) {
         boolean match = matchPassword(passwordOld, user.getPassword());
         if (!match) throw BaseBadRequestException.PasswordIncorrect();
         user.setPassword(passwordEncoder.encode(passwordNew));
@@ -76,7 +79,8 @@ public class UserService {
         return save(user);
     }
 
-    private User save(User user) throws BaseInternalServerErrorException {
+    @SneakyThrows
+    private User save(User user) {
         try {
             return repository.save(user);
         } catch (Exception e) {

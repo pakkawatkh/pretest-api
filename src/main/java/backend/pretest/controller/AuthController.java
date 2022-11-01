@@ -6,6 +6,7 @@ import backend.pretest.model.*;
 import backend.pretest.service.ContentService;
 import backend.pretest.service.UserService;
 import backend.pretest.service.token.TokenService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("auth")
+@AllArgsConstructor
 public class AuthController {
+
     private final ContentService contentService;
     private final UserService userService;
     private final TokenService tokenService;
-
-    public AuthController(ContentService contentService, UserService userService, TokenService tokenService) {
-        this.contentService = contentService;
-        this.userService = userService;
-        this.tokenService = tokenService;
-    }
 
     @GetMapping("contents")
     public ResponseEntity<List<Content>> contents() {

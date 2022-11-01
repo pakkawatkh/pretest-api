@@ -7,6 +7,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -54,7 +55,8 @@ public class TokenService {
         return Algorithm.HMAC256(secret);
     }
 
-    public User getUserByToken() throws BaseForbiddenException {
+    @SneakyThrows
+    public User getUserByToken()   {
         String userId = this.userId();
 
         Optional<User> opt = userRepository.findById(userId);

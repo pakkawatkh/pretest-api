@@ -9,15 +9,13 @@ public abstract class BaseNotFoundException extends IOException {
         super(code);
     }
 
-
     public static BaseNotFoundException NotFoundContent() {
-        return new BaseNotFoundException("ไม่พบข้อมูล") {
-        };
+        return new BaseNotFoundException("ไม่พบข้อมูล") {};
     }
 
     public static BaseNotFoundException NotFoundUser() {
-        return new BaseNotFoundException("ไม่พบชื่อผู้ใช้") {
-
-        };
+        return new BaseNotFoundException("ไม่พบชื่อผู้ใช้") {};
     }
+
+
 }

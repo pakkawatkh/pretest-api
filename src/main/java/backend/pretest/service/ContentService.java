@@ -29,14 +29,14 @@ public class ContentService {
         save(content);
     }
 
-    public void updateContent(Integer contentId, String title, String description) throws BaseNotFoundException, BaseInternalServerErrorException {
+    public void updateContent(Integer contentId, String title, String description){
         Content content = findById(contentId);
         content.setTitle(title.trim());
         content.setDescription(description.trim());
         save(content);
     }
 
-    public void deleteContent(Integer contentId) throws BaseNotFoundException {
+    public void deleteContent(Integer contentId) {
         Content content = findById(contentId);
         repository.delete(content);
     }
@@ -45,13 +45,15 @@ public class ContentService {
         return repository.findAll();
     }
 
-    public Content findById(Integer id) throws BaseNotFoundException {
+    @SneakyThrows
+    public Content findById(Integer id) {
         Optional<Content> opt = repository.findById(id);
         if (opt.isEmpty()) throw BaseNotFoundException.NotFoundContent();
         return opt.get();
     }
 
-    public void save(Content content) throws BaseInternalServerErrorException {
+    @SneakyThrows
+    public void save(Content content) {
         try {
             repository.save(content);
         } catch (Exception e) {
